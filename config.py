@@ -1,0 +1,3 @@
+TOKEN = '6994515359:AAEHNgkipoPznb2A0-3LHyCEqPF_5Gu7B2w'
+API_KEY = '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'
+Kanal_id = -1002099312958
