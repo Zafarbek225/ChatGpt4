@@ -35,21 +35,7 @@ async def start_get(message: Message):
     from users import USERS
     USERS(user_id, ism, lastname, number)
     await bot.send_message(Admin, f"Botga yangi foydalanuvchi qo'shildi!\nFoydalanuvchi - {ism}\nID raqami - {user_id}") 
-    await bot.send_message(user_id, f"Assalomu alaykum! {ism or nom}\n\nBotdan foydalanish uchun telefon raqamingizni yuboring! ",
-                           reply_markup=Menyu, parse_mode=ParseMode.HTML)
-
-@router.message(F.contact)
-async def get_contact(message : Message):
-     user_id = message.from_user.id
-     ism = message.from_user.first_name
-     famil=message.from_user.last_name
-     contact= message.contact
-     number = contact.phone_number
-     from users import USERS
-     Update(USERS(user_id, ism, famil, number))
-     await bot.send_message(user_id, f"{ism} Raqamingiz qabul qilindi✅\nSizning raqamingiz {number} \nSizning id raqamingiz - {user_id}\nBotdan to'liq foydalanishingiz mumkin!",
-                             parse_mode=ParseMode.HTML )
-   
+    await bot.send_message(user_id, f"Assalomu alaykum! {ism or nom} ", parse_mode=ParseMode.HTML)
 
 @router.message(Command('clear'))
 async def clear(message: Message, state: FSMContext):
@@ -65,20 +51,6 @@ async def azolik(callback_query: CallbackQuery):
 @router.message(F.text)
 async def message(message: Message, state: FSMContext):
     user_id = message.from_user.id
-    # class  CheksupChanel(Filter):
-    #     async def __call__(self, message: Message, bot: Bot):
-    #         user_status = await bot.get_chat_member(Kanal_id, message.from_user.id)
-    #         if user_status.status in ['creator', 'administrator', "member"]:
-    #             await bot.send_message(user_id, "Kanalimizni kuzatib boring, sizga yangiliklar taqdim etishda davom etamz!")
-    #             return False            
-    #         return True
-
-    # @dp.message(CheksupChanel())
-    # async def get_chanel(message: Message):
-    #     kanal_link = 'https://t.me/+dD8TM-WKF8E1MGYy'
-    #     await message.answer(f"Iltimosh shu kanalga obuna bo'ling <a href='{kanal_link}'>kanalcha</a>", parse_mode='HTML')
-
-    
     data = await state.get_data()
     user_messages = data.get('user_messages')
     context = data.get('context')
